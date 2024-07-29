@@ -1,5 +1,5 @@
-﻿using Estados;
+﻿using NameSpaceJuego;
 
 Juego juego = new Juego();
 
-juego.Empezar();
+juego.empezar();

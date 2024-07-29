@@ -1,15 +1,27 @@
-namespace Estados;
+namespace NameSpaceJuego;
+using NameSpacesEstados;
 
 class Juego
 {
 //Variables
-bool Finalizar; 
+    private bool finalizar;
 
-//Funciones
-private void IniciarVariables()
-{
-    this.Finalizar = false;
-}
+    private Stack<Estado> estados; 
+    public bool Finalizar{get => finalizar; set => finalizar = value;}
+
+    //Funciones
+    private void IniciarVariables()
+    {
+        this.Finalizar = false;
+    }
+
+    private void IniciarEstados()
+    {
+        this.estados = new Stack<Estado>();
+
+        //Push del primer estado
+        this.estados.Push(new Estado(this.estados));
+    }
 
 
 
@@ -17,17 +29,18 @@ private void IniciarVariables()
     public Juego()
     {
         this.IniciarVariables();
+        this.IniciarEstados();
 
-        Console.WriteLine("Hola");
+        Console.WriteLine("Hola Juego class");
     }
 
-    public void Empezar()
+    public void empezar()
     {
-        Console.WriteLine("Despiertas en un coliseo...\n Te duele mucho la cabeza y no recuerdas nada de lo que te sucedió...\n");
+        Console.WriteLine("Despiertas en un coliseo...\nTe duele mucho la cabeza y no recuerdas nada de lo que te sucedió...\n");
         Console.WriteLine("Pero puedes recordar tu nombre (Introduce tu nombre): ");
         string nombre = Console.ReadLine();
         Console.Clear();
-        while(!this.Finalizar)
+        while(this.Finalizar == false)
         {
 
             int.TryParse(Console.ReadLine(), out int salud);
