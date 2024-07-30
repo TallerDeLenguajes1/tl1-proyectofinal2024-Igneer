@@ -1,5 +1,7 @@
 namespace NameSpaceJuego;
-using NameSpacesEstados;
+
+using NameSpaceEstadoMenuPrincipal;
+using NameSpaceEstados;
 
 class Juego
 {
@@ -20,7 +22,7 @@ class Juego
         this.estados = new Stack<Estado>();
 
         //Push del primer estado
-        this.estados.Push(new Estado(this.estados));
+        this.estados.Push(new EstadoMenuPrincipal(this.estados));
     }
 
 
@@ -30,16 +32,10 @@ class Juego
     {
         this.IniciarVariables();
         this.IniciarEstados();
-
-        Console.WriteLine("Hola Juego class");
     }
 
     public void empezar()
     {
-        Console.WriteLine("Despiertas en un coliseo...\nTe duele mucho la cabeza y no recuerdas nada de lo que te sucedió...\n");
-        Console.WriteLine("Pero puedes recordar tu nombre (Introduce tu nombre): ");
-        string nombre = Console.ReadLine();
-        Console.Clear();
         while(this.Finalizar == false)
         {
 

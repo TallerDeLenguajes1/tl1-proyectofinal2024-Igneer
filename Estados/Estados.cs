@@ -1,11 +1,9 @@
-namespace NameSpacesEstados;
+namespace NameSpaceEstados;
 class Estado
 {
-    Stack<Estado> estados;
+    protected Stack<Estado> estados;
     public Estado(Stack<Estado> estados) //Constructor
     {
         this.estados = estados;
-
-        
     }
 }
