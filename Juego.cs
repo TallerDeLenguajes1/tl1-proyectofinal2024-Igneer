@@ -2,6 +2,8 @@ namespace NameSpaceJuego;
 
 using NameSpaceEstadoMenuPrincipal;
 using NameSpaceEstados;
+using NameSpaceEstadoJuego;
+
 
 class Juego
 {
@@ -23,6 +25,8 @@ class Juego
 
         //Push del primer estado
         this.estados.Push(new EstadoMenuPrincipal(this.estados));
+        this.estados.Push(new EstadoJuego(this.estados));
+
     }
 
 
@@ -36,17 +40,17 @@ class Juego
 
     public void empezar()
     {
-        while(this.Finalizar == false)
+        while(this.estados.Count > 0)
         {
-
-            int.TryParse(Console.ReadLine(), out int salud);
-            if(salud < 0){
-                this.Finalizar = true;
-            }else
+            this.estados.Peek().Update(); // Peek es un metodo que se aplica a Stack, me permite tomar el objeto al princio del stack sin eliminarlo
+            
+            if(this.estados.Peek().consultarFinalizar())
             {
-                Console.WriteLine($"Salud actual: {salud}");
+                this.estados.Pop();
             }
+            
         }
-        Console.WriteLine("Te moriste");
+
+        Console.WriteLine("Juego Finalizado");
     }
 }
