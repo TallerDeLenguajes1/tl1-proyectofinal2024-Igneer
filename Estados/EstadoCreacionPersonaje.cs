@@ -9,7 +9,18 @@ using NameSpacePersonaje;
 class EstadoCreacionPersonaje
     :Estado 
 {
+    //Variables
     ArrayList ListaDePersonajes;
+
+    //Funciones privadas
+    private void CrearPresonaje()
+    {
+        Gui.ObtenerEntrada("Ingrese el nombre del personaje: ");
+        String nombre = Console.ReadLine(); 
+        this.ListaDePersonajes.Add(new Personaje(nombre));
+        Gui.Anuncio("Personaje Creado");
+    }
+
     public EstadoCreacionPersonaje(Stack<Estado> estados, ArrayList ListaDePersonajes)
         :base(estados)
     {
@@ -24,10 +35,7 @@ class EstadoCreacionPersonaje
                 this.finalizar = true;
                 break;
             case 1:
-                System.Console.WriteLine(Gui.Anuncio("Personaje Creado"));
-                this.ListaDePersonajes.Add(new Personaje("Pepe"));
-                this.ListaDePersonajes.Add(new Personaje("Bob"));
-                this.ListaDePersonajes.Add(new Personaje("Lila"));
+                this.CrearPresonaje();
                 break;
             default:
                 break;
@@ -35,13 +43,14 @@ class EstadoCreacionPersonaje
 
     }
 
+
     override public void Update() 
     {
-        System.Console.WriteLine(Gui.MenuTitulo("Creacion de Personaje")); 
-        System.Console.WriteLine(Gui.MenuOpciones(1, "Nuevo Personaje"));
-        System.Console.WriteLine(Gui.MenuOpciones(2, "Editar Personaje"));
-        System.Console.WriteLine(Gui.MenuOpciones(3, "Eliminar Personaje"));
-        System.Console.WriteLine(Gui.MenuOpciones(-1, "Salir")); 
+        Gui.Titulo("Creacion de Personaje"); 
+        Gui.MenuOpciones(1, "Nuevo Personaje");
+        Gui.MenuOpciones(2, "Editar Personaje");
+        Gui.MenuOpciones(3, "Eliminar Personaje");
+        Gui.MenuOpciones(-1, "Salir"); 
 
         System.Console.WriteLine("Entrada: ");
         int.TryParse(Console.ReadLine(), out int opcion);

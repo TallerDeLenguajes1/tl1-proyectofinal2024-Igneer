@@ -16,9 +16,9 @@ class EstadoJuego
 
     override public void Update()
     {
-        System.Console.WriteLine(Gui.MenuTitulo("Estado Juego")); 
-        System.Console.WriteLine(Gui.MenuOpciones(0, "Crear Personaje")); 
-        System.Console.WriteLine(Gui.MenuOpciones(-1, "Salir")); 
+        Gui.MenuTitulo("Estado Juego"); 
+        Gui.MenuOpciones(0, "Crear Personaje"); 
+        Gui.MenuOpciones(-1, "Salir"); 
 
         Gui.ObtenerEntrada("Entrada:");
         int.TryParse(Console.ReadLine(), out int salud);

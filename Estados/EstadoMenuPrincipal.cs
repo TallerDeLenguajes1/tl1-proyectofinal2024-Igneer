@@ -41,11 +41,10 @@ class EstadoMenuPrincipal
 
     override public void Update()
     {
-        System.Console.WriteLine(Gui.MenuTitulo("Estado Menu Principal")); 
-        System.Console.WriteLine(Gui.MenuOpciones(1, "Nueva Partida"));
-        System.Console.WriteLine(Gui.MenuOpciones(2, "Crear Personaje"));
-        System.Console.WriteLine(Gui.MenuOpciones(3, "Lista de personajes"));
-        System.Console.WriteLine(Gui.MenuOpciones(-1, "Salir")); 
+        Gui.MenuOpciones(1, "Nueva Partida");
+        Gui.MenuOpciones(2, "Crear Personaje");
+        Gui.MenuOpciones(3, "Lista de personajes");
+        Gui.MenuOpciones(-1, "Salir"); 
 
         Gui.ObtenerEntrada("Entrada: ");
         int.TryParse(Console.ReadLine(), out int opcion);
