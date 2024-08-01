@@ -1,13 +1,17 @@
 namespace NameSpaceEstadoJuego;
+
+using System.Collections;
 using NameSpaceEstados;
 using NameSpaceGui;
 
 class EstadoJuego
     : Estado
 {
-    public EstadoJuego(Stack<Estado> estados)
+    ArrayList ListaDePersonajes;
+    public EstadoJuego(Stack<Estado> estados, ArrayList ListaDePersonajes)
         : base(estados)
     {
+        this.ListaDePersonajes = ListaDePersonajes;
     }
 
     override public void Update()
@@ -16,7 +20,7 @@ class EstadoJuego
         System.Console.WriteLine(Gui.MenuOpciones(0, "Crear Personaje")); 
         System.Console.WriteLine(Gui.MenuOpciones(-1, "Salir")); 
 
-        System.Console.WriteLine("Ingresa un numero (Juego): ");
+        Gui.ObtenerEntrada("Entrada:");
         int.TryParse(Console.ReadLine(), out int salud);
 
         if(salud < 0)

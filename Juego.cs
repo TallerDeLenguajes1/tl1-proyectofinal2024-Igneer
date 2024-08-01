@@ -3,15 +3,19 @@ namespace NameSpaceJuego;
 using NameSpaceEstadoMenuPrincipal;
 using NameSpaceEstados;
 using NameSpaceEstadoJuego;
-
+using System.Collections;
 
 class Juego
 {
     //Variables
-    //private bool finalizar;
+    private bool finalizar;
+    public bool Finalizar{get => finalizar; set => finalizar = value;}
 
     private Stack<Estado> estados; 
-    //public bool Finalizar{get => finalizar; set => finalizar = value;}
+    private ArrayList ListaDePersonajes;
+
+
+
 
     //Funciones
     private void IniciarVariables()
@@ -19,12 +23,16 @@ class Juego
         this.Finalizar = false;
     }
 
+    private void IniciarListaDePersonajes()
+    {
+        this.ListaDePersonajes = new ArrayList();
+    }
     private void IniciarEstados()
     {
         this.estados = new Stack<Estado>();
 
         //Push del primer estado
-        this.estados.Push(new EstadoMenuPrincipal(this.estados));
+        this.estados.Push(new EstadoMenuPrincipal(this.estados, this.ListaDePersonajes));
         //this.estados.Push(new EstadoJuego(this.estados));
 
     }
@@ -35,6 +43,7 @@ class Juego
     public Juego()
     {
         this.IniciarVariables();
+        this.IniciarListaDePersonajes();
         this.IniciarEstados();
     }
 

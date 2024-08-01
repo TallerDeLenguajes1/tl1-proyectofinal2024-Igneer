@@ -3,23 +3,38 @@ using System.Reflection.Metadata;
 namespace NameSpaceGui;
 class Gui
 {
-    public static String Titulo(String titulo)
+    public static String Titulo(String cadena)
     {
-        titulo = String.Format("==== {0} ====\n\n", titulo);
-        return titulo;
+        cadena = String.Format("==== {0} ====\n\n", cadena);
+        return cadena;
     }
 
-    public static String MenuTitulo(String titulo)
+    public static String MenuTitulo(String cadena)
     {
-        titulo = String.Format("=== {0}\n", titulo);
+        cadena = String.Format("=== {0}\n", cadena);
         
-        return titulo;
+        return cadena;
     }
 
-    public static String MenuOpciones(int opcion, String titulo)
+    public static String MenuOpciones(int opcion, String cadena)
     {
-        titulo = String.Format("- ({0}) : {1} :\n", opcion, titulo);
+        cadena = String.Format("- ({0}) : {1} :\n", opcion, cadena);
 
-        return titulo;
+        return cadena;
     }
+
+    public static String Anuncio(String cadena)
+    {
+        cadena = String.Format("(~) ({0})!\n", cadena);
+
+        return cadena;
+    }
+
+    public static String ObtenerEntrada(String cadena)
+    {
+        cadena = String.Format("- {0}: \n", cadena);
+
+        return cadena;
+    }
+     
 }
