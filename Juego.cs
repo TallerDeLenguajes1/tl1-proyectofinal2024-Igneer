@@ -7,11 +7,11 @@ using NameSpaceEstadoJuego;
 
 class Juego
 {
-//Variables
-    private bool finalizar;
+    //Variables
+    //private bool finalizar;
 
     private Stack<Estado> estados; 
-    public bool Finalizar{get => finalizar; set => finalizar = value;}
+    //public bool Finalizar{get => finalizar; set => finalizar = value;}
 
     //Funciones
     private void IniciarVariables()
@@ -25,11 +25,11 @@ class Juego
 
         //Push del primer estado
         this.estados.Push(new EstadoMenuPrincipal(this.estados));
-        this.estados.Push(new EstadoJuego(this.estados));
+        //this.estados.Push(new EstadoJuego(this.estados));
 
     }
 
-
+//Cambiar juego en program
 
 //Constructores y Destructores
     public Juego()
