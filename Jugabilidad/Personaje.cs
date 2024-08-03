@@ -107,6 +107,11 @@ class Personaje
     //General
     int oro                     = 100;
 
+    public String Nombre()
+    {
+        return this.nombre;
+    }
+
     private void CalcularExperiencia()
     {
         this.expMax = this.nivel * 100;
@@ -128,6 +133,12 @@ class Personaje
 
     public override String ToString()
     {
-        return this.nombre;
+        String str = 
+            $"\nNombre:\t\t{this.nombre}\n" +
+            $"Nivel:\t\t{this.nivel}\n" +
+            $"Puntos de Habilidad:\t\t{this.puntosDeHabilidad}\n" +
+            $"Exp:\t\t{this.exp}/{this.expMax}\n";            
+
+        return str;
     }
 }

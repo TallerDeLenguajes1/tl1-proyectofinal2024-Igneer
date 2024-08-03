@@ -3,29 +3,41 @@ namespace NameSpaceEstadoJuego;
 using System.Collections;
 using NameSpaceEstados;
 using NameSpaceGui;
+using NameSpacePersonaje;
+
 
 class EstadoJuego
     : Estado
 {
-    ArrayList ListaDePersonajes;
-    public EstadoJuego(Stack<Estado> estados, ArrayList ListaDePersonajes)
+    protected Personaje personaje;
+    public EstadoJuego(Stack<Estado> estados, Personaje personajeActual)
         : base(estados)
     {
-        this.ListaDePersonajes = ListaDePersonajes;
+        this.personaje = personajeActual;
+    }
+
+    public void ProcesarEntrada(int opcion)
+    {
+        switch(opcion)
+        {
+            case -1:
+                this.finalizar = true;
+                break;
+            case 1:
+                System.Console.WriteLine(this.personaje.ToString());
+                break;
+            default:
+                break;
+        }
     }
 
     override public void Update()
     {
         Gui.MenuTitulo("Estado Juego"); 
-        Gui.MenuOpciones(0, "Crear Personaje"); 
+        Gui.MenuOpciones(0, "Estadisticas del Personaje"); 
         Gui.MenuOpciones(-1, "Salir"); 
 
-        Gui.ObtenerEntrada("Entrada:");
-        int.TryParse(Console.ReadLine(), out int salud);
-
-        if(salud < 0)
-        {
-            this.finalizar = true; 
-        }
+        int opcion = Gui.PedirUnaEntradaEntera("Entrada");
+        this.ProcesarEntrada(opcion);
     }
 }

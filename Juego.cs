@@ -8,21 +8,10 @@ using System.Collections;
 class Juego
 {
     //Variables
-    private bool finalizar;
-    public bool Finalizar{get => finalizar; set => finalizar = value;}
-
     private Stack<Estado> estados; 
     private ArrayList ListaDePersonajes;
 
-
-
-
     //Funciones
-    private void IniciarVariables()
-    {
-        this.Finalizar = false;
-    }
-
     private void IniciarListaDePersonajes()
     {
         this.ListaDePersonajes = new ArrayList();
@@ -42,7 +31,6 @@ class Juego
 //Constructores y Destructores
     public Juego()
     {
-        this.IniciarVariables();
         this.IniciarListaDePersonajes();
         this.IniciarEstados();
     }

@@ -52,9 +52,8 @@ class EstadoCreacionPersonaje
         Gui.MenuOpciones(3, "Eliminar Personaje");
         Gui.MenuOpciones(-1, "Salir"); 
 
-        System.Console.WriteLine("Entrada: ");
-        int.TryParse(Console.ReadLine(), out int opcion);
-
+        int opcion = Gui.PedirUnaEntradaEntera("Entrada: ");
+        
         this.ProcesarEntrada(opcion); // Probar en probar procesar entrada en GUI
     }
 }

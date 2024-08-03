@@ -42,4 +42,22 @@ class Gui
         System.Console.WriteLine(cadena); 
     }
      
+    public static int PedirUnaEntradaEntera(string mensaje)
+    {
+        Nullable<int> entrada = null;
+        while(entrada == null)
+        {
+            try
+            {
+                Gui.ObtenerEntrada(mensaje);
+                entrada = Convert.ToInt32(Console.ReadLine());
+            }
+            catch(Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+        }
+
+        return entrada.Value;
+    }
 }
