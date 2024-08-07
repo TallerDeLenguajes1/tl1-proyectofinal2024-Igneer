@@ -12,6 +12,15 @@ class Gui
         Console.ResetColor();
     }
 
+    public static void Despedida(String cadena)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        cadena = String.Format("==== {0} ====", cadena);
+        
+        System.Console.WriteLine(cadena);
+        Console.ResetColor();
+    }
+
     public static void MenuTitulo(String cadena)
     {
         cadena = String.Format("=== {0}\n", cadena);
@@ -35,9 +44,31 @@ class Gui
         Console.ResetColor(); 
     }
 
-    public static void ObtenerEntrada(String cadena)
+    public static String BarraDeProgreso(int min, int max, int ancho)
     {
-        cadena = String.Format("- {0}: \n", cadena);
+        String barra = "[";
+
+        double porcentaje = (double)min / max;
+        int completo = Convert.ToInt32(porcentaje * ancho);
+        int incompleto = ancho - completo;
+
+        for (int i = 0; i < completo; i++)
+        {
+            barra += "=";
+        }
+
+        for (int i = completo; i < ancho; i++)
+        {
+            barra += "-";
+        }
+
+        barra += "]"; 
+
+        return barra;
+    }
+    public static void PedirEntrada(String cadena)
+    {
+        cadena = String.Format("- {0}: ", cadena);
 
         System.Console.WriteLine(cadena); 
     }
@@ -49,15 +80,34 @@ class Gui
         {
             try
             {
-                Gui.ObtenerEntrada(mensaje);
+                Gui.PedirEntrada(mensaje);
                 entrada = Convert.ToInt32(Console.ReadLine());
             }
-            catch(Exception e)
+            catch
             {
-                System.Console.WriteLine(e.Message);
+                Console.Clear();
+                Gui.Anuncio("Lo que ingresaste no es valido");
             }
         }
 
         return entrada.Value;
+    }
+
+    public static (bool, int) ControlarEntradaEntera(string mensaje, int numeroMinimo, int numeroMaximo)
+    {
+        bool entradaValida;
+        Gui.PedirEntrada(mensaje);
+        string entrada = Console.ReadLine();
+        if(int.TryParse(entrada, out int numeroEntero) && numeroEntero >= numeroMinimo && numeroEntero <= numeroMaximo)
+        {
+            entradaValida = true;
+        }else
+        {
+            Console.Clear();
+            Gui.Anuncio("Lo que ingresaste no es valido");
+            entradaValida = false;
+        }
+
+        return (entradaValida, numeroEntero);
     }
 }

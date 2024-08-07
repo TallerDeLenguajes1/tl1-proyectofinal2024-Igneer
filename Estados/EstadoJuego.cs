@@ -9,6 +9,7 @@ using NameSpacePersonaje;
 class EstadoJuego
     : Estado
 {
+    int enemigosDerrotados = 0;
     protected Personaje personaje;
     public EstadoJuego(Stack<Estado> estados, Personaje personajeActual)
         : base(estados)
@@ -20,11 +21,15 @@ class EstadoJuego
     {
         switch(opcion)
         {
-            case -1:
-                this.finalizar = true;
-                break;
             case 1:
-                System.Console.WriteLine(this.personaje.ToString());
+                this.personaje.MostrarEstadisticas();
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                //Se ejecuta un metodo para guardar partida
+                this.finalizar = true;
                 break;
             default:
                 break;
@@ -34,8 +39,9 @@ class EstadoJuego
     override public void Update()
     {
         Gui.MenuTitulo("Estado Juego"); 
-        Gui.MenuOpciones(0, "Estadisticas del Personaje"); 
-        Gui.MenuOpciones(-1, "Salir"); 
+        Gui.MenuOpciones(1, "Estadisticas del Personaje");
+        Gui.MenuOpciones(2, "Ir al siguiente combate"); 
+        Gui.MenuOpciones(3, "Guardar Partida y salir al Menu Principal"); 
 
         int opcion = Gui.PedirUnaEntradaEntera("Entrada");
         this.ProcesarEntrada(opcion);

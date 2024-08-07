@@ -4,108 +4,24 @@ namespace NameSpacePersonaje;
 
 class Personaje
 {
-    // //Datos
-    // string nombre;
-    // string raza;
-    // string edad;
-
-    // //Caracteristicas
-    // int velocidad;
-    // int destreza;
-    // int fuerza;
-    // int nivel;
-    // int armadura;
-    // int salud;
-
-    // private void Stats()
-    // {
-    //     Random random = new Random();
-    //     this.velocidad = random.Next(1, 11);
-    //     this.destreza = random.Next(1, 5);
-    //     this.fuerza = random.Next(1, 11);
-    //     this.nivel = 1;
-    //     this.armadura = random.Next(1, 11);
-    //     this.salud = 100;
-    // }
-
-    // private void Datos()
-    // {
-    //     System.Console.WriteLine("Ingresa el nombre del personaje: ");
-    //     this.nombre = Console.ReadLine();
-    //     int opcion = -1;
-    //     while(opcion < 1 || opcion > 9)
-    //     {
-    //         int.TryParse(Console.ReadLine(), out opcion);
-    //         System.Console.WriteLine("Elije la raza: ");
-    //         switch(opcion)
-    //         {
-    //             case 1:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(1, "Dragonborn"));
-    //                 this.raza = "Dragonborn";
-    //                 break;
-    //             case 2:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(2, "Dwarf"));
-    //                 this.raza = "Dwarf";
-    //                 break;
-    //             case 3:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(3, "Elf"));
-    //                 this.raza = "Elf";
-    //                 break;
-    //             case 4:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(4, "Gnome"));
-    //                 this.raza = "Gnome";
-    //                 break;
-    //             case 5:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(5, "Half-elf"));
-    //                 this.raza = "Half-elf";
-    //                 break;
-    //             case 6:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(6, "Half-orc"));
-    //                 this.raza = "Half-orc";
-    //                 break;
-    //             case 7:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(7, "Halfling"));
-    //                 this.raza = "Halfling";
-    //                 break;
-    //             case 8:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(8, "Human"));
-    //                 this.raza = "Human";
-    //                 break;
-    //             case 9:
-    //                 System.Console.WriteLine(Gui.MenuOpciones(9, "Tiefling"));
-    //                 this.raza = "Tiefling";
-    //                 break;
-    //             default:
-    //                 System.Console.WriteLine("No se ingreso una opcion valida");
-    //                 break;
-    //         }
-    //     }
-    // }
-
     //Caracteristicas Generales
-    private String nombre       = "";
+    private string nombre       = "";
+    string raza                 = "";
     int nivel                   = 0;
     int puntosDeHabilidad       = 3;
     int exp                     = 0;
     int expMax                  = 100;
 
     //Atributos
-    int vitalidad               = 1;
-    int fuerza                  = 1;
-    int destreza                = 1;
-    int agilidad                = 1;
-    int inteligencia            = 1;
+    int vitalidad               = 0;
+    int fuerza                  = 0;
+    int armadura                = 0;
 
     //Estadisticas
-    int salud                   = 0;
-    int saludMax                = 10;
+    int salud                   = 100;
+    int saludMax                = 0;
     int dmg                     = 0; //Daño
-    int dmgMax                  = 0; //DañoMaximo
-    int precision               = 0;
     int defensa                 = 0;
-
-    //General
-    int oro                     = 100;
 
     public String Nombre()
     {
@@ -118,11 +34,9 @@ class Personaje
     }
     private void CalcularEstadisticas()
     {
-        this.salud = this.vitalidad * 10;
-        this.dmgMax = this.fuerza * 2;
-        this.dmg = this.dmgMax / 2;
-        this.precision = this.destreza * 2;
-        this.defensa = this.agilidad * 2;
+        this.saludMax = salud + this.vitalidad * 10;
+        this.dmg = this.fuerza * 2;
+        this.defensa = this.armadura * 2;
     }
     public Personaje(String nombre)
     {
@@ -131,14 +45,41 @@ class Personaje
         this.nombre = nombre;
     }
 
-    public override String ToString()
+    public string Banner()
     {
-        String str = 
-            $"\nNombre:\t\t{this.nombre}\n" +
-            $"Nivel:\t\t{this.nivel}\n" +
-            $"Puntos de Habilidad:\t\t{this.puntosDeHabilidad}\n" +
-            $"Exp:\t\t{this.exp}/{this.expMax}\n";            
+        String str = $"\nNombre:{this.nombre}"+$"   Nivel:{this.nivel}\n";            
+        return str;
+    }
+    public String DetallesDelPersonaje()
+    {
+        String str = String.Format(
+        "\nNombre:              {0,-20}\n" +
+        "Nivel:               {1,-20}\n" +
+        "Puntos de Habilidad: {2,-20}\n" +
+        "Exp:                 {3}/{4}\n",
+        nombre, nivel, puntosDeHabilidad, exp, expMax);          
 
         return str;
+    }
+
+    public void MostrarEstadisticas() 
+    {
+        Gui.Titulo("Características Generales:");
+        Console.WriteLine(String.Format("Nombre:              {0,-20}\n", nombre));
+        Console.WriteLine(String.Format("Raza:                {0,-20}\n", raza));
+        Console.WriteLine(String.Format("Nivel:               {0,-20}\n", nivel));
+        Console.WriteLine(String.Format("Puntos de Habilidad: {0,-20}\n", puntosDeHabilidad));
+        Console.WriteLine(String.Format("Exp:                 {0,-20}/{1}\n", exp, expMax));
+
+        Gui.Titulo("\nAtributos:");
+        Console.WriteLine(String.Format("Vitalidad:           {0,-20}\n", vitalidad));
+        Console.WriteLine(String.Format("Fuerza:              {0,-20}\n", fuerza));
+        Console.WriteLine(String.Format("Armadura:            {0,-20}\n", armadura));
+
+        Gui.Titulo("\nEstadísticas:");
+        Console.WriteLine(String.Format("Salud:               {0,-20}/{1}\n", salud, saludMax));
+        Console.WriteLine(String.Format("Salud Máxima:        {0,-20}\n", saludMax));
+        Console.WriteLine(String.Format("Daño:                {0,-20}\n", dmg));
+        Console.WriteLine(String.Format("Defensa:             {0,-20}\n", defensa));
     }
 }

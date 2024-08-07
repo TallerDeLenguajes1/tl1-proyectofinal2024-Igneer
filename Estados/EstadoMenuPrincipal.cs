@@ -11,13 +11,13 @@ using NameSpacePersonaje;
 class EstadoMenuPrincipal 
     : Estado
 {
-    protected ArrayList ListaDePersonajes;
+    protected List<Personaje> ListaDePersonajes;
     protected Personaje personajeActual;
-    public EstadoMenuPrincipal(Stack<Estado> estados, ArrayList ListaDePersonajes)
+    public EstadoMenuPrincipal(Stack<Estado> estados, List<Personaje> ListaDePersonajes)
         : base(estados)
     {
         this.ListaDePersonajes = ListaDePersonajes;
-        this.personajeActual = null;
+        personajeActual = null;
     }
 
 
@@ -25,19 +25,24 @@ class EstadoMenuPrincipal
     {
         switch(entrada)
         {
-            case -1:
-                this.finalizar = true;
-                break;
             case 1:
-                this.EmpezarNuevoJuego();
+                Console.Clear();
+                EmpezarNuevoJuego();
                 break;
             case 2:
-                this.estados.Push(new EstadoCreacionPersonaje(this.estados, this.ListaDePersonajes));
+                Console.Clear();
+                estados.Push(new EstadoCreacionPersonaje(estados, ListaDePersonajes));
                 break;
             case 3:
-                this.SeleccionarPersonaje();
+                Console.Clear();
+                SeleccionarPersonaje();
+                break;
+            case 4:
+                finalizar = true;
                 break;
             default:
+                Console.Clear();
+                Gui.Anuncio("La opcion ingresada no es valida");
                 break;
         }
 
@@ -45,53 +50,63 @@ class EstadoMenuPrincipal
 
     override public void Update()
     {
-        if(this.personajeActual != null)
+        (bool, int) entrada = (false, 0);
+        if(personajeActual != null)
         {
-            System.Console.WriteLine("Personaje Actual: "+this.personajeActual.Nombre()+"\n");
+            System.Console.WriteLine("Personaje Actual: "+ personajeActual.Nombre() + "\n");
         }
-        Gui.MenuOpciones(1, "Nueva Partida");
-        Gui.MenuOpciones(2, "Crear Personaje");
-        Gui.MenuOpciones(3, "Seleccionar de personajes");
-        Gui.MenuOpciones(-1, "Salir"); 
+        while(!entrada.Item1)
+        {
+            Gui.Titulo("Menu Principal");
+            Gui.MenuOpciones(1, "Nueva Partida");
+            Gui.MenuOpciones(2, "Crear Personaje");
+            Gui.MenuOpciones(3, "Seleccion de personajes");
+            Gui.MenuOpciones(4, "Salir"); 
 
-        int opcion = Gui.PedirUnaEntradaEntera("Entrada");
+            entrada = Gui.ControlarEntradaEntera("Ingresa una opcion: ", 1, 4);
+        }
 
-        this.ProcesarEntrada(opcion);
+        int opcion = entrada.Item2;
+
+        ProcesarEntrada(opcion);
     }
 
     public void EmpezarNuevoJuego()
     {
-        //mientras el personajeactual sea nulo, no se puede comenzar el juego
-        if(this.personajeActual == null) //error
+        //mientras el personaje actual sea nulo, no se puede comenzar el juego
+        if(personajeActual == null) //error
         {
             Gui.Anuncio("No seleccionaste un personaje para empezar, selecciona uno para comenzar");
         }else//Empezar el juego
         {
-            this.estados.Push(new EstadoJuego(this.estados, this.personajeActual));
+            estados.Push(new EstadoJuego(estados, personajeActual));
         }
     }
 
     public void SeleccionarPersonaje()
     {
-        //Mostrar los personajes para elegir
-        for (int i = 0; i < this.ListaDePersonajes.Count; i++)
+        if(ListaDePersonajes.Count == 0)
         {
-            System.Console.WriteLine(i + ": " + ListaDePersonajes[i].ToString());
+            Gui.Anuncio("No hay personajes creados");
+        }else
+        {
+            //Mostrar los personajes para elegir
+            (bool, int) entrada = (false, 0);
+            while(!entrada.Item1)
+            {
+                for (int i = 0; i < ListaDePersonajes.Count; i++)
+                {
+                    System.Console.WriteLine("Personaje N° "+(i+1) + ": " + ListaDePersonajes[i].DetallesDelPersonaje());
+                }
+                entrada = Gui.ControlarEntradaEntera("Ingresa el numero del personaje a seleccionar", 1, ListaDePersonajes.Count);
+                if(entrada.Item1)
+                {
+                    entrada.Item2 -= 1;
+                    personajeActual = ListaDePersonajes[entrada.Item2];
+                    Console.Clear();
+                    Gui.Anuncio($"El personaje {personajeActual.Nombre()} fue seleccionado");
+                }
+            }
         }
-        int opcion = Gui.PedirUnaEntradaEntera("Seleccion de Personajes");
-
-        try
-        {
-            this.personajeActual = (Personaje)this.ListaDePersonajes[opcion];
-        }catch(Exception e)
-        {
-            System.Console.WriteLine(e.Message);
-        }
-
-        if(this.personajeActual != null)
-        {
-            Gui.Anuncio($"El personaje {this.personajeActual.ToString()}fue seleccionado");
-        }
-
     }
 }
