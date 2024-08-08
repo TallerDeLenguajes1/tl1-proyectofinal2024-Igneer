@@ -96,28 +96,6 @@ class EstadoCreacionPersonaje
                     entrada.Item1 = true;
                 }
             }
-            // while (!entradaValida)
-            // {   
-            //     for (int i = 0; i < ListaDePersonajes.Count; i++)
-            //     {
-            //         System.Console.WriteLine("Personaje N° "+(i+1) + ": " + ListaDePersonajes[i].DetallesDelPersonaje());
-            //     }
-            //     Gui.PedirEntrada("Ingresa el numero del personaje a eliminar: ");
-            //     string entrada = Console.ReadLine();
-            //     int opcion;
-            //     if(int.TryParse(entrada , out opcion) && opcion >= 1 && opcion <= ListaDePersonajes.Count)
-            //     {
-            //         opcion -= 1;
-            //         ListaDePersonajes.RemoveAt(opcion);
-            //         Console.Clear();
-            //         Gui.Anuncio("Personaje eliminado correctamente");
-            //         entradaValida = true;
-            //     }else
-            //     {
-            //         Console.Clear();
-            //         Gui.Anuncio("Lo que ingresaste no es valido");
-            //     }
-            // }
         }
     }
 

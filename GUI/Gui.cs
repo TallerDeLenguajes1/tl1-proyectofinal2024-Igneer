@@ -12,6 +12,23 @@ class Gui
         Console.ResetColor();
     }
 
+    public static void TituloJuego()
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        
+        String cadena = @"
+=================================================================================================
+   _____   ______    __        ______        _______.     _______. _______  __    __  .___  ___. 
+ /      | /  __  \  |  |      /  __  \      /       |    /       ||   ____||  |  |  | |   \/   | 
+|  ,----'|  |  |  | |  |     |  |  |  |    |   (----`   |   (----`|  |__   |  |  |  | |  \  /  | 
+|  |     |  |  |  | |  |     |  |  |  |     \   \        \   \    |   __|  |  |  |  | |  |\/|  | 
+|  `----.|  `--'  | |  `----.|  `--'  | .----)   |   .----)   |   |  |____ |  `--'  | |  |  |  | 
+ \______| \______/  |_______| \______/  |_______/    |_______/    |_______| \______/  |__|  |__| 
+ 
+ ================================================================================================";
+        System.Console.WriteLine(cadena+"\n");
+        Console.ResetColor();
+    }
     public static void Despedida(String cadena)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -35,6 +52,13 @@ class Gui
         System.Console.WriteLine(cadena); 
     }
 
+    public static void CombateOpciones(int opcion, String cadena)
+    {
+        cadena = String.Format("- ({0}) | {1} |", opcion, cadena);
+
+        System.Console.WriteLine(cadena); 
+    }
+
     public static void Anuncio(String cadena)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -50,9 +74,8 @@ class Gui
 
         double porcentaje = (double)min / max;
         int completo = Convert.ToInt32(porcentaje * ancho);
-        int incompleto = ancho - completo;
 
-        for (int i = 0; i < completo; i++)
+        for (int i = 0; i <= completo; i++)
         {
             barra += "=";
         }

@@ -31,6 +31,7 @@ class EstadoMenuPrincipal
                 break;
             case 2:
                 Console.Clear();
+                personajeActual = null;
                 estados.Push(new EstadoCreacionPersonaje(estados, ListaDePersonajes));
                 break;
             case 3:
@@ -51,15 +52,15 @@ class EstadoMenuPrincipal
     override public void Update()
     {
         (bool, int) entrada = (false, 0);
-        if(personajeActual != null)
-        {
-            System.Console.WriteLine("Personaje Actual: "+ personajeActual.Nombre() + "\n");
-        }
         while(!entrada.Item1)
         {
-            Gui.Titulo("Menu Principal");
+            if(personajeActual != null)
+            {
+                System.Console.WriteLine("Personaje Selecionado: "+ personajeActual.Nombre + "\n");
+            }
+            Gui.TituloJuego();
             Gui.MenuOpciones(1, "Nueva Partida");
-            Gui.MenuOpciones(2, "Crear Personaje");
+            Gui.MenuOpciones(2, "Creacion de Personajes");
             Gui.MenuOpciones(3, "Seleccion de personajes");
             Gui.MenuOpciones(4, "Salir"); 
 
@@ -79,7 +80,7 @@ class EstadoMenuPrincipal
             Gui.Anuncio("No seleccionaste un personaje para empezar, selecciona uno para comenzar");
         }else//Empezar el juego
         {
-            estados.Push(new EstadoJuego(estados, personajeActual));
+            estados.Push(new EstadoJuego(estados, personajeActual, ListaDePersonajes));
         }
     }
 
@@ -104,7 +105,7 @@ class EstadoMenuPrincipal
                     entrada.Item2 -= 1;
                     personajeActual = ListaDePersonajes[entrada.Item2];
                     Console.Clear();
-                    Gui.Anuncio($"El personaje {personajeActual.Nombre()} fue seleccionado");
+                    Gui.Anuncio($"El personaje {personajeActual.Nombre} fue seleccionado");
                 }
             }
         }
