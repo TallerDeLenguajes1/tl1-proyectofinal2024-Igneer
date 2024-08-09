@@ -67,7 +67,7 @@ class EstadoMenuPrincipal
             }
             Gui.TituloJuego();
             Gui.MenuOpciones(1, "Nueva Partida");
-            Gui.MenuOpciones(2, "Creacion de Personajes");
+            Gui.MenuOpciones(2, "Gestion de Personajes");
             Gui.MenuOpciones(3, "Seleccion de personajes");
             Gui.MenuOpciones(4, "Hall de la fama");
             Gui.MenuOpciones(5, "Salir"); 

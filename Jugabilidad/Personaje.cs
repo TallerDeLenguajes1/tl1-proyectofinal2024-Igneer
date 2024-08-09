@@ -6,7 +6,7 @@ class Personaje
 {
     //Caracteristicas Generales
     private string nombre       = "";
-    string raza                 = "";
+    string raza                 = "Humano";
     int nivel                   = 1;
     int exp                     = 0;
     int expMax                  = 100;

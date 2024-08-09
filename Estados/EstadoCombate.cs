@@ -52,7 +52,7 @@ class EstadoCombate
         while(!entrada.Item1 && personajeActual.Salud > 0 && enemigo.Salud > 0) // Falta enemigo
         {
             Gui.Titulo("Estado Combate");
-            System.Console.WriteLine($"Enemigo\nHP {enemigo.Salud}/{enemigo.SaludMax}:");
+            System.Console.WriteLine($"{enemigo.Raza}\nHP {enemigo.Salud}/{enemigo.SaludMax}:");
             System.Console.WriteLine(Gui.BarraDeProgreso(enemigo.Salud, enemigo.SaludMax, 10)); //Barra de salud del enemigo
             System.Console.WriteLine("\n");
             System.Console.WriteLine($"{personajeActual.Nombre}\nHP {personajeActual.Salud}/{personajeActual.SaludMax}:");

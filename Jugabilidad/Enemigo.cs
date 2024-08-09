@@ -1,8 +1,5 @@
 namespace NameSpaceEnemigo;
-
 using NameSpaceGui;
-using NameSpacePersonaje;
-
 class Enemigo
 {
     string raza                 = "";
@@ -26,9 +23,20 @@ class Enemigo
     public int SaludMax { get => saludMax;}
     public int Defensa { get => defensa;}
 
+    public string Raza { get => raza;}
+
     public Enemigo(int nivelDelPersonaje)
     {
         Random random = new Random();
+        try
+        {
+            var resultado = ManejoDeApi.GetRazasAsync("https://www.dnd5eapi.co/api/races").Result;
+            raza = resultado.results[random.Next(0, resultado.results.Count)].name;
+        }
+        catch (Exception)
+        {
+            raza = "Human";
+        }
         int atributoMejorado;
         int puntosDeHabilidadDelEnemigo = nivelDelPersonaje * 2;
         while(puntosDeHabilidadDelEnemigo > 0)

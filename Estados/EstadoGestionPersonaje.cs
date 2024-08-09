@@ -60,7 +60,7 @@ class EstadoCreacionPersonaje
         while(!entrada.Item1)
         {
 
-            Gui.Titulo("Creacion de Personaje"); 
+            Gui.Titulo("Gestion de Personajes"); 
             Gui.MenuOpciones(1, "Nuevo Personaje");
             Gui.MenuOpciones(2, "Eliminar Personaje");
             Gui.MenuOpciones(3, "Salir"); 
