@@ -1,1 +1,1 @@
-[{"Nombre":"pedro","Salud":90,"SaludMax":90,"Dmg":2,"Defensa":2,"Nivel":1,"EnemigosDerrotados":0,"Exp":0},{"Nombre":"pedro","Salud":60,"SaludMax":60,"Dmg":8,"Defensa":2,"Nivel":1,"EnemigosDerrotados":0,"Exp":0},{"Nombre":"sdouiasdoi","Salud":60,"SaludMax":60,"Dmg":8,"Defensa":2,"Nivel":1,"EnemigosDerrotados":0,"Exp":0}]
+[{"Nombre":"pedro","Salud":60,"SaludMax":60,"Dmg":2,"Defensa":8,"Nivel":1,"EnemigosDerrotados":0,"Exp":0,"Sobrevivir":false},{"Nombre":"p","Salud":90,"SaludMax":90,"Dmg":2,"Defensa":2,"Nivel":1,"EnemigosDerrotados":0,"Exp":0,"Sobrevivir":false}]

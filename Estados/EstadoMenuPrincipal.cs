@@ -39,6 +39,13 @@ class EstadoMenuPrincipal
                 SeleccionarPersonaje();
                 break;
             case 4:
+                Console.Clear();
+                HallDeLaFama();
+                Gui.Anuncio("Presiona cualquier tecla para volver");
+                Console.ReadKey();
+                Console.Clear();
+                break;
+            case 5:
                 finalizar = true;
                 break;
             default:
@@ -62,9 +69,10 @@ class EstadoMenuPrincipal
             Gui.MenuOpciones(1, "Nueva Partida");
             Gui.MenuOpciones(2, "Creacion de Personajes");
             Gui.MenuOpciones(3, "Seleccion de personajes");
-            Gui.MenuOpciones(4, "Salir"); 
+            Gui.MenuOpciones(4, "Hall de la fama");
+            Gui.MenuOpciones(5, "Salir"); 
 
-            entrada = Gui.ControlarEntradaEntera("Ingresa una opcion: ", 1, 4);
+            entrada = Gui.ControlarEntradaEntera("Ingresa una opcion: ", 1, 5);
         }
 
         int opcion = entrada.Item2;
@@ -107,6 +115,24 @@ class EstadoMenuPrincipal
                     Console.Clear();
                     Gui.Anuncio($"El personaje {personajeActual.Nombre} fue seleccionado");
                 }
+            }
+        }
+    }
+
+    public void HallDeLaFama()
+    {
+        string rutaJson = "HallDeLaFama.json";
+
+        List<Personaje> personajesGanadores = ManejoDeJson.CargarListaDePersonajes(rutaJson);
+
+        if(personajesGanadores.Count() == 0)
+        {
+            Gui.Anuncio("No hay personajes ganadores");
+        }else
+        {
+            for (int i = 0; i < personajesGanadores.Count; i++)
+            {
+                System.Console.WriteLine("Ganador N° "+(i+1) + ": " + personajesGanadores[i].DetallesDelPersonaje());
             }
         }
     }

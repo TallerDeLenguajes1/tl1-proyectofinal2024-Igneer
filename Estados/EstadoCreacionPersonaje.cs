@@ -90,6 +90,7 @@ class EstadoCreacionPersonaje
                 if(entrada.Item1)
                 {
                     entrada.Item2 -= 1;
+                    ManejoDeJson.EliminarPersonajeGuardado(ListaDePersonajes[entrada.Item2]);
                     ListaDePersonajes.RemoveAt(entrada.Item2);
                     Console.Clear();
                     Gui.Anuncio("Personaje eliminado correctamente");

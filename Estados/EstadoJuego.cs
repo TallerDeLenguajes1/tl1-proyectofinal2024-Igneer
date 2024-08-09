@@ -8,6 +8,7 @@ using NameSpaceEstadoCombate;
 using System.Transactions;
 using NameSpaceEnemigo;
 using System.Security.Cryptography;
+using System.Text.Json;
 
 class EstadoJuego
     : Estado
@@ -60,12 +61,13 @@ class EstadoJuego
     {
         (bool,int) entrada = (false, 0);
         int enemigosNecesariosAderrotar = 4;
+        string json = File.ReadAllText("personajes.json");
         while(!entrada.Item1 && personajeActual.Salud>0 && personajeActual.EnemigosDerrotados < enemigosNecesariosAderrotar)
         {
-            if(ListaDePersonajes.Count == 3)
-            {
-                Gui.Warning("NO HAY MAS ESPACIO PARA GUARDAR PERSONAJES, VUELVE AL MENU PRINCIPAL Y ELIMINA UNO");
-            }
+            // if(JsonSerializer.Deserialize<List<Personaje>>(json).Count == 3)
+            // {
+            //     Gui.Warning("NO HAY MAS ESPACIO PARA GUARDAR PERSONAJES, VUELVE AL MENU PRINCIPAL Y ELIMINA UNO");
+            // }
             Gui.Titulo("Zona de descanso");
             System.Console.WriteLine(personajeActual.Banner());
             System.Console.WriteLine("\n");
@@ -88,10 +90,11 @@ class EstadoJuego
             }
             if(personajeActual.EnemigosDerrotados >= enemigosNecesariosAderrotar)
             {
+                personajeActual.ActualizarSobrevivir();
                 Gui.Anuncio("Lograste Sobrevivir");
                 Gui.Anuncio($"El personaje {personajeActual.Nombre} pasara al Hall de la fama");
                 Gui.Anuncio($"Elimina el personaje y crea uno nuevo");
-                //Guardar Record
+                ManejoDeJson.GuardarRecord(personajeActual);
             }
         }else
         {

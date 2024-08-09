@@ -5,7 +5,7 @@ using NameSpacePersonaje;
 
 Stack<Estado> estados = new Stack<Estado>(); 
 
-List<Personaje> ListaDePersonajes = ManejoDeJson.CargarListaDePersonajes();
+List<Personaje> ListaDePersonajes = ManejoDeJson.CargarListaDePersonajes("personajes.json");
 
 estados.Push(new EstadoMenuPrincipal(estados, ListaDePersonajes));
 

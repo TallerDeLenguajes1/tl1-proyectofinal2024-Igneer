@@ -22,8 +22,10 @@ class Personaje
     int dmg                     = 0; //Daño
     int defensa                 = 0;
 
+
     //General
     int enemigosDerrotados = 0;
+    bool sobrevivir = false;
 
     public string Nombre { get => nombre;}
     public int Salud { get => salud;}
@@ -34,6 +36,13 @@ class Personaje
     public int EnemigosDerrotados { get => enemigosDerrotados;}
     
     public int Exp { get => exp;}
+    public bool Sobrevivir { get => sobrevivir;}
+
+    public void ActualizarSobrevivir()
+    {
+        sobrevivir = true;
+    }
+
     public void ActualizarSalud(int dmgRecibido)
     {
         if(dmgRecibido > 0)
@@ -107,7 +116,7 @@ class Personaje
 
     public string Banner()
     {
-        String str = $"\n{nombre}"+$"   Nivel: {nivel}   Salud: {salud}/{saludMax}   Enemigos por derrotar: {enemigosDerrotados}";            
+        String str = $"\n{nombre}"+$"   Nivel: {nivel}   Salud: {salud}/{saludMax}   Enemigos derrotados: {enemigosDerrotados}";            
         return str;
     }
     public String DetallesDelPersonaje()

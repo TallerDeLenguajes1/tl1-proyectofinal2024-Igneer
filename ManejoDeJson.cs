@@ -32,11 +32,29 @@ class ManejoDeJson
         return guardadoConExito;
     }
 
-    public static List<Personaje> CargarListaDePersonajes()
+    public static void GuardarRecord(Personaje personaje)
+    {
+        string rutaJson = "HallDeLaFama.json";
+
+        if(!File.Exists(rutaJson))
+        {
+            File.WriteAllText(rutaJson, "[]");
+        }
+        
+        string json = File.ReadAllText(rutaJson);
+
+        List<Personaje> ListaGuardada = JsonSerializer.Deserialize<List<Personaje>>(json);
+        bool personajeExiste = ListaGuardada.Any(p => p.Nombre == personaje.Nombre); // Verifico que el personaje no esté ya guardado
+        if(personaje.Sobrevivir && !personajeExiste)
+        {
+            ListaGuardada.Add(personaje);
+            File.WriteAllText(rutaJson, JsonSerializer.Serialize(ListaGuardada));
+        }
+    }
+
+    public static List<Personaje> CargarListaDePersonajes(string rutaJson)
     {
         List<Personaje> ListaDePersonajes;
-
-        string rutaJson = "personajes.json";
 
         if(File.Exists(rutaJson))
         {
@@ -48,5 +66,23 @@ class ManejoDeJson
         }
 
         return ListaDePersonajes;
+    }
+
+    public static void EliminarPersonajeGuardado(Personaje personaje)
+    {
+        string rutaJson = "personajes.json";
+
+        if(!File.Exists(rutaJson))
+        {
+            File.WriteAllText(rutaJson, "[]");
+        }
+        
+        string json = File.ReadAllText(rutaJson);
+
+        List<Personaje> ListaGuardada = JsonSerializer.Deserialize<List<Personaje>>(json);
+        
+        ListaGuardada.RemoveAll(p => p.Nombre == personaje.Nombre);
+
+        File.WriteAllText(rutaJson, JsonSerializer.Serialize(ListaGuardada));
     }
 }

@@ -53,7 +53,7 @@ class Enemigo
 
     public void GenerarEstadisticasDelEnemigo()
     {
-        saludMax = 50 + vitalidad * 10;
+        saludMax = 25 + vitalidad * 10;
         salud = saludMax;
         dmg = fuerza * 2;
         defensa = armadura * 2;
