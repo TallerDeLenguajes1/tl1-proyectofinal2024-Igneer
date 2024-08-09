@@ -5,7 +5,7 @@ using NameSpacePersonaje;
 
 Stack<Estado> estados = new Stack<Estado>(); 
 
-List<Personaje> ListaDePersonajes = new List<Personaje>();
+List<Personaje> ListaDePersonajes = ManejoDeJson.CargarListaDePersonajes();
 
 estados.Push(new EstadoMenuPrincipal(estados, ListaDePersonajes));
 
@@ -20,5 +20,5 @@ while(estados.Count > 0)
 
 }
 
-Gui.Despedida("Juego Finalizado");
+Gui.Warning("Juego Finalizado");
 

@@ -7,7 +7,7 @@ using NameSpacePersonaje;
 using NameSpaceEstadoCombate;
 using System.Transactions;
 using NameSpaceEnemigo;
-
+using System.Security.Cryptography;
 
 class EstadoJuego
     : Estado
@@ -39,7 +39,14 @@ class EstadoJuego
             case 3:
                 //Se ejecuta un metodo para guardar partida
                 Console.Clear();
-                Gui.Anuncio("Se guardo la partida con exito");
+                if(ManejoDeJson.GuardarListaDePersonajes(personajeActual))
+                {
+                    Gui.Anuncio("Se guardo la partida con exito");
+                    finalizar = true;
+                }
+                break;
+            case 4:
+                Console.Clear();
                 finalizar = true;
                 break;
             default:
@@ -55,15 +62,20 @@ class EstadoJuego
         int enemigosNecesariosAderrotar = 4;
         while(!entrada.Item1 && personajeActual.Salud>0 && personajeActual.EnemigosDerrotados < enemigosNecesariosAderrotar)
         {
-            
+            if(ListaDePersonajes.Count == 3)
+            {
+                Gui.Warning("NO HAY MAS ESPACIO PARA GUARDAR PERSONAJES, VUELVE AL MENU PRINCIPAL Y ELIMINA UNO");
+            }
             Gui.Titulo("Zona de descanso");
             System.Console.WriteLine(personajeActual.Banner());
             System.Console.WriteLine("\n");
             Gui.MenuOpciones(1, "Estadisticas del Personaje");
             Gui.MenuOpciones(2, "Ir al combate"); 
-            Gui.MenuOpciones(3, "Guardar Partida y salir al Menu Principal"); 
+            Gui.MenuOpciones(3, "Guardar Partida y salir al Menu Principal");
+            Gui.MenuOpciones(4, "Salir sin guardar");
+
         
-            entrada = Gui.ControlarEntradaEntera("Ingresa una opcion: ", 1, 3);
+            entrada = Gui.ControlarEntradaEntera("Ingresa una opcion: ", 1, 4);
         }
 
         if(personajeActual.Salud <= 0 || personajeActual.EnemigosDerrotados >= enemigosNecesariosAderrotar)

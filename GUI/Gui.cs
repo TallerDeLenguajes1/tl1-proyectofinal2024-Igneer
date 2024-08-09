@@ -29,7 +29,7 @@ class Gui
         System.Console.WriteLine(cadena+"\n");
         Console.ResetColor();
     }
-    public static void Despedida(String cadena)
+    public static void Warning(String cadena)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         cadena = String.Format("==== {0} ====", cadena);

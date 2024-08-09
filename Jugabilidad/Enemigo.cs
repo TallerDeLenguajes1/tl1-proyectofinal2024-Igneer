@@ -21,10 +21,10 @@ class Enemigo
     int armadura                = 1;
 
     public int Dmg {get => dmg;}
-    public int Salud { get => salud; set => salud = value; }
+    public int Salud { get => salud;}
 
-    public int SaludMax { get => saludMax; set => saludMax = value; }
-    public int Defensa { get => defensa; set => defensa = value; }
+    public int SaludMax { get => saludMax;}
+    public int Defensa { get => defensa;}
 
     public Enemigo(int nivelDelPersonaje)
     {
@@ -56,7 +56,7 @@ class Enemigo
         saludMax = 50 + vitalidad * 10;
         salud = saludMax;
         dmg = fuerza * 2;
-        Defensa = armadura * 2;
+        defensa = armadura * 2;
     }
 
     public void ActualizarSalud(int dmgRecibido)

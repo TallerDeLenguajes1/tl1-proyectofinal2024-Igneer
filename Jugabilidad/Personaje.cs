@@ -25,13 +25,13 @@ class Personaje
     //General
     int enemigosDerrotados = 0;
 
-    public string Nombre { get => nombre; set => nombre = value; }
-    public int Salud { get => salud; set => salud = value; }
-    public int SaludMax { get => saludMax; set => saludMax = value; }
-    public int Dmg { get => dmg; set => dmg = value; }
-    public int Defensa { get => defensa; set => defensa = value; }
-    public int Nivel { get => nivel; set => nivel = value; }
-    public int EnemigosDerrotados { get => enemigosDerrotados; set => enemigosDerrotados = value; }
+    public string Nombre { get => nombre;}
+    public int Salud { get => salud;}
+    public int SaludMax { get => saludMax;}
+    public int Dmg { get => dmg;}
+    public int Defensa { get => defensa;}
+    public int Nivel { get => nivel;}
+    public int EnemigosDerrotados { get => enemigosDerrotados;}
     
     public int Exp { get => exp;}
     public void ActualizarSalud(int dmgRecibido)
@@ -51,7 +51,7 @@ class Personaje
     }
     public void AumentarEnemigosDerrotados()
     {
-        EnemigosDerrotados++;
+        enemigosDerrotados++;
     }
 
     public void AumentoDeAtributos()
