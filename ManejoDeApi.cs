@@ -1,3 +1,4 @@
+namespace NameSpaceManejoApi;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 class ManejoDeApi
@@ -5,14 +6,8 @@ class ManejoDeApi
     // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
     public class Result
     {
-        [JsonPropertyName("index")]
-        public string index { get; set; }
-
         [JsonPropertyName("name")]
         public string name { get; set; }
-
-        [JsonPropertyName("url")]
-        public string url { get; set; }
     }
 
     public class Razas
@@ -24,9 +19,9 @@ class ManejoDeApi
         public List<Result> results { get; set; }
     }
 
-    public static async Task<Razas> GetRazasAsync(string url)
+    public static async Task<Razas> GetRazasAsync()
     {
-        url = "https://www.dnd5eapi.co/api/races";
+        string url = "https://www.dnd5eapi.co/api/races";
         try
         {
             HttpClient client = new HttpClient();
@@ -39,7 +34,6 @@ class ManejoDeApi
         }
         catch (HttpRequestException e)
         {
-            Console.WriteLine($"Error {e.ToString}");
             throw e;
         }
     }

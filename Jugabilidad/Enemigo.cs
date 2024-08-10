@@ -1,4 +1,5 @@
 namespace NameSpaceEnemigo;
+using NameSpaceManejoApi;
 using NameSpaceGui;
 class Enemigo
 {
@@ -30,10 +31,10 @@ class Enemigo
         Random random = new Random();
         try
         {
-            var resultado = ManejoDeApi.GetRazasAsync("https://www.dnd5eapi.co/api/races").Result;
+            ManejoDeApi.Razas resultado = ManejoDeApi.GetRazasAsync().Result;
             raza = resultado.results[random.Next(0, resultado.results.Count)].name;
         }
-        catch (Exception)
+        catch(Exception)
         {
             raza = "Human";
         }
