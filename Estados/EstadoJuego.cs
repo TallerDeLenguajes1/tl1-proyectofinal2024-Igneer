@@ -62,7 +62,7 @@ class EstadoJuego
         (bool,int) entrada = (false, 0);
         int enemigosNecesariosAderrotar = 4;
         string json = File.ReadAllText("personajes.json");
-        while(!entrada.Item1 && personajeActual.Salud>0 && personajeActual.EnemigosDerrotados < enemigosNecesariosAderrotar)
+        while(!entrada.Item1 && personajeActual.Salud>0 && personajeActual.EnemigosDerrotados < enemigosNecesariosAderrotar && !personajeActual.Sobrevivir)
         {
             // if(JsonSerializer.Deserialize<List<Personaje>>(json).Count == 3)
             // {
@@ -80,7 +80,7 @@ class EstadoJuego
             entrada = Gui.ControlarEntradaEntera("Ingresa una opcion: ", 1, 4);
         }
 
-        if(personajeActual.Salud <= 0 || personajeActual.EnemigosDerrotados >= enemigosNecesariosAderrotar)
+        if(personajeActual.Salud <= 0 || personajeActual.EnemigosDerrotados >= enemigosNecesariosAderrotar || personajeActual.Sobrevivir)
         {
             finalizar = true;
             if(personajeActual.Salud <= 0)
@@ -88,12 +88,14 @@ class EstadoJuego
                 Gui.Anuncio($"El personaje {personajeActual.Nombre} se murio");
                 Gui.Anuncio($"Elimina el personaje y crea uno nuevo");
             }
-            if(personajeActual.EnemigosDerrotados >= enemigosNecesariosAderrotar)
+            if(personajeActual.EnemigosDerrotados >= enemigosNecesariosAderrotar || personajeActual.Sobrevivir)
             {
                 personajeActual.ActualizarSobrevivir();
                 Gui.Anuncio("Lograste Sobrevivir");
                 Gui.Anuncio($"El personaje {personajeActual.Nombre} pasara al Hall de la fama");
                 Gui.Anuncio($"Elimina el personaje y crea uno nuevo");
+                ManejoDeJson.EliminarPersonajeGuardado(personajeActual);
+                ManejoDeJson.GuardarListaDePersonajes(personajeActual);
                 ManejoDeJson.GuardarRecord(personajeActual);
             }
         }else

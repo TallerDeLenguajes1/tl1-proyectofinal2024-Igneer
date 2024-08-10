@@ -32,15 +32,14 @@ class Personaje
     public int SaludMax { get => saludMax;}
     public int Dmg { get => dmg;}
     public int Defensa { get => defensa;}
-    public int Nivel { get => nivel;}
+    public int Nivel {  get => nivel; set => nivel = value; }
     public int EnemigosDerrotados { get => enemigosDerrotados;}
     
-    public int Exp { get => exp;}
-    public bool Sobrevivir { get => sobrevivir;}
-
+    public int Exp {  get => exp; set => exp = value; }
+    public bool Sobrevivir { get => sobrevivir; set => sobrevivir = value; }
     public void ActualizarSobrevivir()
     {
-        sobrevivir = true;
+        Sobrevivir = true;
     }
 
     public void ActualizarSalud(int dmgRecibido)

@@ -1,1 +1,1 @@
-[]
+[{"Nombre":"Pedro","Salud":90,"SaludMax":90,"Dmg":2,"Defensa":2,"Nivel":1,"EnemigosDerrotados":0,"Exp":0,"Sobrevivir":false},{"Nombre":"Leo","Salud":60,"SaludMax":60,"Dmg":8,"Defensa":2,"Nivel":1,"EnemigosDerrotados":0,"Exp":0,"Sobrevivir":false},{"Nombre":"Manu","Salud":90,"SaludMax":90,"Dmg":2,"Defensa":2,"Nivel":3,"EnemigosDerrotados":0,"Exp":0,"Sobrevivir":true}]
